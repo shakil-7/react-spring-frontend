@@ -5,7 +5,7 @@ export const Navbar = () => {
 		<nav className='navbar'>
 			<h1>Bank</h1>
 			<div className="links">
-				<Link to='/'>All Users</Link>
+				<Link to='/all-user'>All Users</Link>
 				<Link to='/registration'>Sign Up</Link>
 
 				<a href="/login" style={{

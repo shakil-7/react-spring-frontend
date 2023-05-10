@@ -19,11 +19,7 @@ export const RegistrationForm = () => {
 		const userInfo = { name, email, password, gender }
 		setIsPending(true);
 		setTimeout(() => {
-			// console.log(userInfo);
-
 			setIsPending(false);
-			// history.push('/');
-			// console.log('redirect to home page');
 			fetch('http://localhost:8080/registration', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -31,8 +27,12 @@ export const RegistrationForm = () => {
 			}).then((response) => {
 				response.json()
 					.then((res) => {
-						if(res.status == 'OK') {
+						if(res.status === 'OK') {
 							setFeedbackMessage(res.message);
+							setName('');
+							setEmail('');
+							setPassword('');
+							setGender('Male');
 						}
 						else {
 							if(res.uniqueEmail === false) {
@@ -84,7 +84,7 @@ export const RegistrationForm = () => {
 				<label>Gender</label>
 				<select
 					value={gender} // why this line giving warning
-					onClick={(e) => setGender(e.target.value)}
+					onChange={(e) => setGender(e.target.value)}
 				>
 					<option value='Male'>Male</option>
 					<option value='Female'>Female</option>

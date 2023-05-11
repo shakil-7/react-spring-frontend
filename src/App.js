@@ -5,6 +5,7 @@ import { RegistrationForm } from './components/RegistrationForm';
 import { AllUserList } from './components/AllUserList';
 import { UserDetails } from './components/UserDetails';
 import { LoginForm } from './components/LoginForm';
+import { AddMoney } from './components/AddMoney';
 
 function App() {
 	return (
@@ -30,8 +31,12 @@ function App() {
 							<AllUserList />
 						</Route>
 
-						<Route path='/user/:email'>
+						<Route exact path='/user/:email'>
 							<UserDetails />
+						</Route>
+
+						<Route exact path='/user/:email/add_money'>
+							<AddMoney />
 						</Route>
 
 					</Switch>

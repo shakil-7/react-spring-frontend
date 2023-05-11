@@ -31,7 +31,7 @@ export const useFetchUser = (url) => {
 				console.log(err.message);
 				setIsPending(false);
 			})
-		}, 1000);
+		}, 100);
 
 	}, [url])
 

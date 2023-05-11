@@ -1,13 +1,23 @@
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useFetchUser } from "./customHook/useFetchUser";
+import { NotFound } from "./NotFound";
 
 export const UserDetails = () => {
 
     const { email } = useParams();
+    const history = useHistory();
 
     const { data: user, isPending, errorMessage } = useFetchUser(
         'http://localhost:8080/user?email=' + email
     )
+
+    const handleClick = () => {
+        fetch('http://localhost:8080/user?email=' + email, {
+            method: 'DELETE'
+        }).then(() => {
+            history.push('/all-user')
+        });
+    };
 
     return (
         <div className="blog-details">
@@ -19,9 +29,11 @@ export const UserDetails = () => {
                         <h2>{user.name}</h2>
                         <p>{user.email}</p>
                         <div>{user.genter}</div>
+                        { !user.name && <NotFound /> }
+                        { user.name && <button onClick={handleClick}>Delete</button> }
                     </article>
                 )
-            
+
             }
         </div>
     );

@@ -13,22 +13,16 @@ export const AddMoney = ({senderEmail}) => {
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    const [url, setUrl] = useState('');
-
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userInfo = { sender, amount };
+        const userInfo = { senderEmail, amount };
         setIsPending(true);
 
-        setUrl("http://localhost:8080/user/" + senderEmail + "/add_money");
-        console.log(userInfo);
-
-
         setTimeout(() => {
-            fetch(url, {
+            fetch("http://localhost:8080/add_money", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userInfo)

@@ -32,7 +32,9 @@ export const AllUserList = () => {
             <p>{user.email}</p>
             {/* <p>{user.gender}</p> */}
             <br/>
-            <button onClick={()=>handleClick(user.email)}>Delete</button>
+            <button onClick={()=>handleClick(user.email)}>
+              <img src="" alt="Delete"></img>
+            </button>
           </div>
         ))
 

@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { RegistrationForm } from './components/RegistrationForm';
 import { AllUserList } from './components/AllUserList';
 import { UserDetails } from './components/UserDetails';
+import { LoginForm } from './components/LoginForm';
 
 function App() {
 	return (
@@ -19,6 +20,10 @@ function App() {
 
 						<Route exact path='/registration'>
 							<RegistrationForm />
+						</Route>
+
+						<Route exact path='/login'>
+							<LoginForm />
 						</Route>
 
 						<Route exact path='/all-user'>

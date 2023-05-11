@@ -33,24 +33,28 @@ export const RegistrationForm = () => {
 							setEmail('');
 							setPassword('');
 							setGender('Male');
+
+							setTimeout(() => {
+								history.push('/login');
+							},300);
 						}
 						else {
 							if(res.uniqueEmail === false) {
 								setEmail(res.message);
 							}
 							else{
-								console.log(res);
+								// console.log(res);
 								setFeedbackMessage(res.message);
 							}
 						}
 						setTimeout(() => {
 							setFeedbackMessage('');
 							setEmail('');
-						}, 1000);
+						}, 500);
 					});
 
 			})
-		}, 500);
+		}, 300);
 	};
 
 	return (
@@ -83,7 +87,7 @@ export const RegistrationForm = () => {
 
 				<label>Gender</label>
 				<select
-					value={gender} // why this line giving warning
+					value={gender}
 					onChange={(e) => setGender(e.target.value)}
 				>
 					<option value='Male'>Male</option>

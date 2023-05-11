@@ -70,22 +70,22 @@
   cursor: pointer;
 }
 
-/* registration new blog form */
-.registration {
+/* create new blog form */
+.create {
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
-.registration label {
+.create label {
   text-align: left;
   display: block;
 }
-.registration h2 {
+.create h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 30px;
 }
-.registration input, .registration textarea, .registration select {
+.create input, .create textarea, .create select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -93,7 +93,7 @@
   box-sizing: border-box;
   display: block;
 }
-.registration button {
+.create button {
   background: #f1356d;
   color: #fff;
   border: 0;

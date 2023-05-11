@@ -54,7 +54,7 @@ export const RegistrationForm = () => {
 	};
 
 	return (
-		<div className="registration">
+		<div className="create">
 			<h2>Registration Form</h2>
 			<form onSubmit={handleSubmit}>
 				<label>Name</label>

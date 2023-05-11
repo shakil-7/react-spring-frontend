@@ -1,41 +1,45 @@
 
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { Demo } from './components/Demo';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { RegistrationForm } from './components/RegistrationForm';
 import { AllUserList } from './components/AllUserList';
+import { UserDetails } from './components/UserDetails';
 
 function App() {
-  return (
+	return (
 
-    <Router>
+		<Router>
 
-      <Navbar />
+			<div className='App'>
+				<Navbar />
 
-      <div className="App">
-        <Switch>
-
-          <Router exact path='/'>
-            <Demo />
-          </Router>
+				<div className="content">
+					<Switch>
 
 
-          <Router exact path='/registration'>
-            <RegistrationForm />
-          </Router>
+						<Route exact path='/registration'>
+							<RegistrationForm />
+						</Route>
 
-          <Router exact path='/all-user'>
-            <AllUserList />
-          </Router>
+						<Route exact path='/all-user'>
+							<AllUserList />
+						</Route>
 
-        </Switch>
+						<Route path='/user/:email'>
+							<UserDetails />
+						</Route>
+
+					</Switch>
 
 
 
-      </div>
+				</div>
+			</div>
 
-    </Router>
-  );
+
+
+		</Router>
+	);
 }
 
 export default App;

@@ -46,7 +46,7 @@ export const RegistrationForm = () => {
 						}
 						setTimeout(() => {
 							setFeedbackMessage('');
-							setEmail('');
+							// setMobileNumber('');
 						}, 1000);
 					});
 

@@ -7,8 +7,8 @@ export const AllUserList = () => {
 
   const { data: users, isPending } = useFetchUser('http://localhost:8080/all-user');
 
-  const handleClick = (email) => {
-    fetch('http://localhost:8080/user?email=' + email, {
+  const handleClick = (mobileNumber) => {
+    fetch('http://localhost:8080/user?mobileNumber=' + mobileNumber, {
         method: 'DELETE'
     }).then(() => {
         window.location.reload();
@@ -32,7 +32,7 @@ export const AllUserList = () => {
             <p>{user.email}</p>
             {/* <p>{user.gender}</p> */}
             <br/>
-            <button onClick={()=>handleClick(user.email)}>
+            <button onClick={()=>handleClick(user.mobileNumber)}>
               <img src="" alt="Delete"></img>
             </button>
           </div>

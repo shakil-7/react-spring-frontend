@@ -18,7 +18,7 @@ export const AddMoney = ({senderEmail}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userInfo = { senderEmail, amount };
+        const userInfo = { email: sender, amount };
         setIsPending(true);
 
         setTimeout(() => {
@@ -52,21 +52,14 @@ export const AddMoney = ({senderEmail}) => {
         <div className="create">
             <h2>Add Money</h2>
             <form onSubmit={handleSubmit}>
-                <label>Sender Phone Number</label>
+                <label>Your Mobile Number</label>
                 <input
                     type='text'
                     required
-                    value={sender}
-                    onChange={(e) => setSender(e.target.value)}
+                    defaultValue={sender}
+                    readOnly
+                    // onChange={(e) => setSender(e.target.value)}
                 />
-
-                {/* <label>Receiver Phone Number</label>
-                <input
-                    type='text'
-                    required
-                    value={receiver}
-                    onChange={(e) => setReceiver(e.target.value)}
-                /> */}
 
                 <label>Amount</label>
                 <input

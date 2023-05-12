@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { useFetchUser } from './customHook/useFetchUser';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useFetchUser } from './customHook/useFetchUser';
 
 export const AllUserList = () => {
 
@@ -26,7 +26,7 @@ export const AllUserList = () => {
         users.map(user => (
           <div className="blog-list blog-preview" key={user.id} >
             
-            <Link to={ `/user/${user.email}` }>
+            <Link to={ `/user/${user.mobileNumber}` }>
               <h2>{user.name}</h2>
             </Link>
             <p>{user.email}</p>

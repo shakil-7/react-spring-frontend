@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export const AddMoney = ({senderEmail}) => {
+export const AddMoney = ({senderMobileNumber}) => {
 
-    const [sender, setSender] = useState(senderEmail);
+    const [sender, setSender] = useState(senderMobileNumber);
     const [receiver, setReceiver] = useState('');
     const [amount, setAmount] = useState(0);
 
@@ -18,7 +18,7 @@ export const AddMoney = ({senderEmail}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userInfo = { email: sender, amount };
+        const userInfo = { mobileNumber: sender, amount: amount };
         setIsPending(true);
 
         setTimeout(() => {

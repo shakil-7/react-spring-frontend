@@ -6,6 +6,7 @@ export const RegistrationForm = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [mobileNumber, setMobileNumber] = useState('');
 	const [gender, setGender] = useState('Male');
 
 
@@ -16,7 +17,7 @@ export const RegistrationForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const userInfo = { name, email, password, gender }
+		const userInfo = { name, email, password, mobileNumber, gender }
 		setIsPending(true);
 		setTimeout(() => {
 			setIsPending(false);
@@ -27,30 +28,26 @@ export const RegistrationForm = () => {
 			}).then((response) => {
 				response.json()
 					.then((res) => {
-						if(res.status === 'OK') {
+						if (res.status === 200) {
 							setFeedbackMessage(res.message);
 							setName('');
 							setEmail('');
 							setPassword('');
+							setMobileNumber('');
 							setGender('Male');
+							console.log('here');
 
 							setTimeout(() => {
 								history.push('/login');
-							},300);
+							}, 300);
 						}
 						else {
-							if(res.uniqueEmail === false) {
-								setEmail(res.message);
-							}
-							else{
-								// console.log(res);
-								setFeedbackMessage(res.message);
-							}
+							setFeedbackMessage(res.message);
 						}
 						setTimeout(() => {
 							setFeedbackMessage('');
 							setEmail('');
-						}, 500);
+						}, 1000);
 					});
 
 			})
@@ -75,6 +72,14 @@ export const RegistrationForm = () => {
 					required
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
+				/>
+
+				<label>Mobile Number</label>
+				<input
+					type='text'
+					required
+					value={mobileNumber}
+					onChange={(e) => setMobileNumber(e.target.value)}
 				/>
 
 				<label>Password</label>

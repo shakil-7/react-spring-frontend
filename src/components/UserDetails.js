@@ -8,7 +8,7 @@ import { useFetchUser } from "./customHook/useFetchUser";
 
 export const UserDetails = () => {
 
-    const { email } = useParams();
+    const { mobileNumber } = useParams();
     const [isAddMoneyClicked, setIsAddMoneyClicked] = useState(0);
     const [isSendMoneyClicked, setIsSendMoneyClicked] = useState(0);
     const history = useHistory();
@@ -16,11 +16,11 @@ export const UserDetails = () => {
     const [sendMoneyButton, setSendMoneyButton] = useState('Send Money');
 
     const { data: details, isPending, errorMessage } = useFetchUser(
-        'http://localhost:8080/user?email=' + email
+        'http://localhost:8080/user?mobileNumber=' + mobileNumber
     )
 
     const handleClick = () => {
-        fetch('http://localhost:8080/user?email=' + email, {
+        fetch('http://localhost:8080/user?mobileNumber=' + mobileNumber, {
             method: 'DELETE'
         }).then(() => {
             history.push('/all-user')
@@ -61,6 +61,7 @@ export const UserDetails = () => {
                         {details.name && <h2>{details.name}</h2>}
                         {details.name && <p>Email : {details.email}</p>}
                         {details.name && <p>Account No: {details.accountNumber} </p>}
+                        {details.name && <p>Mobile No: <b>{details.mobileNumber} </b> </p>}
                         {details.name && <p>Balance: <b className="bold_and_color">{details.balance}</b></p>}
 
                         {!details.name && <NotFound />}
@@ -69,7 +70,7 @@ export const UserDetails = () => {
 
 
                         {details.name && isSendMoneyClicked === 0 && <button onClick={(e) => handleAddMoneyClick(e)}>{addMoneyButton}</button>}
-                        {isAddMoneyClicked !== 0 && <AddMoney senderEmail={details.email} />}
+                        {isAddMoneyClicked !== 0 && <AddMoney senderMobileNumber={details.mobileNumber} />}
 
                         <span style={{
                             margin: 5
@@ -77,7 +78,7 @@ export const UserDetails = () => {
 
                         </span>
                         {details.name && isAddMoneyClicked === 0 && <button onClick={(e) => handleSendMoneyClick(e)}>{sendMoneyButton}</button>}
-                        {isSendMoneyClicked !== 0 && <SendMoney senderEmail={details.email} />}
+                        {isSendMoneyClicked !== 0 && <SendMoney senderMobileNumber={details.mobileNumber} />}
 
                         {/* <Link to={'/user/'.concat(details.email).concat("/add_money")}>
                             Add Money

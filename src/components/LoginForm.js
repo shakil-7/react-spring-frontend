@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 export const LoginForm = () => {
 
-    const [email, setEmail] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
     const [isPending, setIsPending] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -14,7 +14,7 @@ export const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userLoginInfo = { email, password };
+        const userLoginInfo = { mobileNumber, password };
         setIsPending(true);
         setTimeout(() => {
             fetch('http://localhost:8080/user/login', {
@@ -30,7 +30,7 @@ export const LoginForm = () => {
                 }
                 return response.json();
             }).then(data => {
-                history.push('/user/'.concat(email));
+                history.push('/user/'.concat(mobileNumber));
                 setIsPending(false);
             }).catch(err => {
                 setIsPending(false);
@@ -46,12 +46,12 @@ export const LoginForm = () => {
         <div className="create">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <label>Email</label>
+                <label>Mobile Number</label>
                 <input
                     type='text'
                     required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={mobileNumber}
+                    onChange={(e) => setMobileNumber(e.target.value)}
                 />
 
                 <label>Password</label>

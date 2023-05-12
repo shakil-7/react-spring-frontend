@@ -9,11 +9,11 @@ export const AllUserList = () => {
 
   const handleClick = (mobileNumber) => {
     fetch('http://localhost:8080/user?mobileNumber=' + mobileNumber, {
-        method: 'DELETE'
+      method: 'DELETE'
     }).then(() => {
-        window.location.reload();
+      window.location.reload();
     });
-};
+  };
 
   return (
     <div className="blog-list blog-details">
@@ -25,14 +25,14 @@ export const AllUserList = () => {
         !isPending &&
         users.map(user => (
           <div className="blog-list blog-preview" key={user.id} >
-            
-            <Link to={ `/user/${user.mobileNumber}` }>
+
+            <Link to={`/user/${user.mobileNumber}`}>
               <h2>{user.name}</h2>
             </Link>
             <p>{user.email}</p>
             {/* <p>{user.gender}</p> */}
-            <br/>
-            <button onClick={()=>handleClick(user.mobileNumber)}>
+            <br />
+            <button onClick={() => handleClick(user.mobileNumber)}>
               <img src="" alt="Delete"></img>
             </button>
           </div>

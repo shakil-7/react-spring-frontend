@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { AddMoney } from "./AddMoney";
 import { NotFound } from "./NotFound";
 import { SendMoney } from "./SendMoney";
+import { TransactionDetails } from "./TransactionDetails";
 import { useFetchUser } from "./customHook/useFetchUser";
 // import { Link } from "react-router-dom";
 
@@ -11,9 +12,12 @@ export const UserDetails = () => {
     const { mobileNumber } = useParams();
     const [isAddMoneyClicked, setIsAddMoneyClicked] = useState(0);
     const [isSendMoneyClicked, setIsSendMoneyClicked] = useState(0);
+    const [transactionDetails, setTransactionDetails] = useState(0);
+
     const history = useHistory();
     const [addMoneyButton, setaddMoneyButton] = useState('Add Money');
     const [sendMoneyButton, setSendMoneyButton] = useState('Send Money');
+    const [transactionDetailsButton, settransactionDetailsButton] = useState('Transaction Details');
 
     const { data: details, isPending, errorMessage } = useFetchUser(
         'http://localhost:8080/user?mobileNumber=' + mobileNumber
@@ -50,6 +54,18 @@ export const UserDetails = () => {
         }
     };
 
+    const handleTransactionDetailsClick = (e) => {
+        e.preventDefault();
+        setTransactionDetails(transactionDetails ^ 1);
+        console.log(isSendMoneyClicked);
+        if (isSendMoneyClicked) {
+            settransactionDetailsButton('Detals');
+        }
+        else {
+            settransactionDetailsButton('Close');
+        }
+    };
+
     return (
         <div className="blog-details">
             {isPending && <div>Loading...</div>}
@@ -69,7 +85,7 @@ export const UserDetails = () => {
                         <br />
 
 
-                        {details.name && isSendMoneyClicked === 0 && <button onClick={(e) => handleAddMoneyClick(e)}>{addMoneyButton}</button>}
+                        {details.name && isSendMoneyClicked === 0  && transactionDetails === 0 && <button onClick={(e) => handleAddMoneyClick(e)}>{addMoneyButton}</button>}
                         {isAddMoneyClicked !== 0 && <AddMoney senderMobileNumber={details.mobileNumber} />}
 
                         <span style={{
@@ -77,12 +93,21 @@ export const UserDetails = () => {
                         }}>
 
                         </span>
-                        {details.name && isAddMoneyClicked === 0 && <button onClick={(e) => handleSendMoneyClick(e)}>{sendMoneyButton}</button>}
+                        {details.name && isAddMoneyClicked === 0 && transactionDetails === 0 && <button onClick={(e) => handleSendMoneyClick(e)}>{sendMoneyButton}</button>}
                         {isSendMoneyClicked !== 0 && <SendMoney senderMobileNumber={details.mobileNumber} />}
 
                         {/* <Link to={'/user/'.concat(details.email).concat("/add_money")}>
                             Add Money
                         </Link> */}
+
+                        <span style={{
+                            margin: 5
+                        }}>
+
+                        </span>
+
+                        {details.name && isAddMoneyClicked === 0 && isSendMoneyClicked === 0 && <button onClick={(e) => handleTransactionDetailsClick(e)}>{transactionDetailsButton}</button>}
+                        {transactionDetails !== 0 && <TransactionDetails senderMobileNumber={details.mobileNumber} />}
 
 
                         <div style={{

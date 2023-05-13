@@ -58,8 +58,8 @@ export const UserDetails = () => {
         e.preventDefault();
         setTransactionDetails(transactionDetails ^ 1);
         console.log(isSendMoneyClicked);
-        if (isSendMoneyClicked) {
-            settransactionDetailsButton('Detals');
+        if (transactionDetails) {
+            settransactionDetailsButton('Transaction Details');
         }
         else {
             settransactionDetailsButton('Close');
@@ -107,7 +107,7 @@ export const UserDetails = () => {
                         </span>
 
                         {details.name && isAddMoneyClicked === 0 && isSendMoneyClicked === 0 && <button onClick={(e) => handleTransactionDetailsClick(e)}>{transactionDetailsButton}</button>}
-                        {transactionDetails !== 0 && <TransactionDetails senderMobileNumber={details.mobileNumber} />}
+                        {transactionDetails !== 0 && <TransactionDetails mobileNumber={details.mobileNumber} />}
 
 
                         <div style={{

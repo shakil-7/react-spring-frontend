@@ -11,6 +11,8 @@ import { Logout } from './components/Logout';
 import { NotFound } from './components/NotFound';
 import { DeletePage } from './components/DeletePage';
 
+import { NotAuthorizedPage } from './components/NotAuthorizedPage';
+
 function App() {
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +24,7 @@ function App() {
 		<Router>
 
 			<div className='App'>
-				<Navbar isLoggedIn={isLoggedIn}/>
+				<Navbar isLoggedIn={isLoggedIn} />
 
 				<div className="content">
 					<Switch>
@@ -32,27 +34,30 @@ function App() {
 						</Route>
 
 						<Route exact path='/login'>
-							<LoginForm setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser}/>
+							<LoginForm setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />
 						</Route>
 
 						<Route exact path='/logout'>
-							<Logout setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser}/>
+							<Logout setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />
 						</Route>
 
 						<Route exact path='/all-user'>
-							<AllUserList setIsLoggedIn={setIsLoggedIn} currentUser={currentUser}/>
+							<AllUserList setIsLoggedIn={setIsLoggedIn} currentUser={currentUser} />
 						</Route>
 
 						<Route exact path='/user/:mobileNumber'>
-							<UserDetails setIsLoggedIn={setIsLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+							<UserDetails setIsLoggedIn={setIsLoggedIn} currentUser={currentUser} setCurrentUser={setCurrentUser} />
 						</Route>
 
 						<Route exact path='/user/:email/add_money'>
-							<AddMoney setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser}/>
+							<AddMoney setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />
 						</Route>
 
 						<Route exact path='/notfound'>
 							<NotFound />
+						</Route>
+						<Route exact path='/notauthorized'>
+							<NotAuthorizedPage />
 						</Route>
 						<Route exact path='/deletepage'>
 							<DeletePage />

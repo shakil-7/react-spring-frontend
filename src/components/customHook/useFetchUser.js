@@ -13,7 +13,7 @@ export const useFetchUser = (url, currentUser) => {
 	useEffect(() => {
 
 		if (Cookies.get('isLoggedIn') !== 'true') {
-			history.push('/notfound')
+			history.push('/notauthorized')
 		}
 		else {
 			console.log("currentUser -> " + currentUser);

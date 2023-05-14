@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export const SendMoney = ({ senderMobileNumber }) => {
     const [sender, setSender] = useState(senderMobileNumber);
@@ -27,7 +28,11 @@ export const SendMoney = ({ senderMobileNumber }) => {
         setTimeout(() => {
             fetch("http://localhost:8080/send_money", {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${Cookies.get(senderMobileNumber + "#jwtToken")}`
+                },
                 body: JSON.stringify(moneyTransfer)
             }).then(response => {
                 if (!response.ok) {
@@ -41,6 +46,7 @@ export const SendMoney = ({ senderMobileNumber }) => {
                 window.location.reload();
                 setIsPending(false);
             }).catch(err => {
+                console.log(err);
                 setIsPending(false);
                 setTimeout(() => {
                     setFeedbackMessage('');

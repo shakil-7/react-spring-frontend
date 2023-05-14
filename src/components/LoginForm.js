@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export const LoginForm = () => {
 
@@ -30,9 +31,14 @@ export const LoginForm = () => {
                 }
                 return response.json();
             }).then(data => {
+
+                Cookies.set(mobileNumber + "#jwtToken", data.jwtToken, {expires: 7});
+                // console.log(data.jwtToken);
+                // console.log(Cookies.get('jwtToken'));
                 history.push('/user/'.concat(mobileNumber));
                 setIsPending(false);
             }).catch(err => {
+                console.log(err);
                 setIsPending(false);
                 setTimeout(() => {
                     setFeedbackMessage('');

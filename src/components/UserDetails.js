@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { AddMoney } from "./AddMoney";
 import { NotFound } from "./NotFound";
 import { SendMoney } from "./SendMoney";
 import { TransactionDetails } from "./TransactionDetails";
 import { useFetchUser } from "./customHook/useFetchUser";
-// import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export const UserDetails = () => {
 
@@ -20,7 +20,8 @@ export const UserDetails = () => {
     const [transactionDetailsButton, settransactionDetailsButton] = useState('Transaction Details');
 
     const { data: details, isPending, errorMessage } = useFetchUser(
-        'http://localhost:8080/user?mobileNumber=' + mobileNumber
+        'http://localhost:8080/user?mobileNumber=' + mobileNumber,
+        mobileNumber
     )
 
     const handleClick = () => {
@@ -65,6 +66,11 @@ export const UserDetails = () => {
             settransactionDetailsButton('Close');
         }
     };
+
+    // useEffect(()=>{
+
+    //     console.log("Token -> " + Cookies.get(mobileNumber + "#jwtToken"));
+    // },[])
 
     return (
         <div className="blog-details">

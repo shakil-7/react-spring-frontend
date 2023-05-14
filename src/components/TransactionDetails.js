@@ -3,7 +3,7 @@ import { useFetchUser } from './customHook/useFetchUser';
 
 export const TransactionDetails = ({mobileNumber}) => {
 
-    const { data: transactions, isPending } = useFetchUser('http://localhost:8080/user/transaction?mobileNumber='  + mobileNumber);
+    const { data: transactions, isPending } = useFetchUser('http://localhost:8080/user/transaction?mobileNumber='  + mobileNumber, mobileNumber);
 
     return (
         <div className="blog-list blog-details">

@@ -1,7 +1,8 @@
+import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-export const AddMoney = ({senderMobileNumber}) => {
+export const AddMoney = ({ senderMobileNumber }) => {
 
     const [sender, setSender] = useState(senderMobileNumber);
     const [receiver, setReceiver] = useState('');
@@ -21,10 +22,16 @@ export const AddMoney = ({senderMobileNumber}) => {
         const userInfo = { mobileNumber: sender, amount: amount };
         setIsPending(true);
 
+        // var jwtToken = Cookies.get(senderMobileNumber + "#jwtToken");
+
         setTimeout(() => {
             fetch("http://localhost:8080/add_money", {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${Cookies.get(senderMobileNumber + "#jwtToken")}`
+                },
                 body: JSON.stringify(userInfo)
             }).then(response => {
                 if (!response.ok) {
@@ -58,7 +65,7 @@ export const AddMoney = ({senderMobileNumber}) => {
                     required
                     defaultValue={sender}
                     readOnly
-                    // onChange={(e) => setSender(e.target.value)}
+                // onChange={(e) => setSender(e.target.value)}
                 />
 
                 <label>Amount</label>

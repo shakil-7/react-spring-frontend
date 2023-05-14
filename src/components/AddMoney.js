@@ -29,8 +29,8 @@ export const AddMoney = ({ senderMobileNumber }) => {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${Cookies.get(senderMobileNumber + "#jwtToken")}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${Cookies.get(senderMobileNumber + "#jwtToken")}`
                 },
                 body: JSON.stringify(userInfo)
             }).then(response => {

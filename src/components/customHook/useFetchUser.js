@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 
 
-export const useFetchUser = (url, mobileNumber) => {
+export const useFetchUser = (url, currentUser) => {
 
 	const [data, setData] = useState([]);
 	const [isPending, setIsPending] = useState(true);
@@ -11,9 +11,16 @@ export const useFetchUser = (url, mobileNumber) => {
 
 	useEffect(() => {
 
-		mobileNumber = "-1";
+		// if(mobileNumber === undefined) {
+		// 	mobileNumber = "-1";
+		// }
 
-		let jwtToken = Cookies.get(mobileNumber + "#jwtToken");
+		console.log("currentUser -> " + currentUser);
+
+		// currentUser = "1";
+
+		let jwtToken = Cookies.get(currentUser + "#jwtToken");
+		console.log(Cookies.get(currentUser + "#jwtToken") === undefined)
 
 		console.log("url : " + url)
 		// jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIOiItMSIsImlhdCI6MTY4NDAzNzAxOCwiZXhwIjoxNjg0MDM4ODE4fQ.u9iPYuFptcPb3CifVxpjZoLnXP_FXN9qd8VBfdR7MVY";
@@ -28,7 +35,7 @@ export const useFetchUser = (url, mobileNumber) => {
 				headers: {
 					'Accept': 'application/json, text/plain, */*',
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${Cookies.get(mobileNumber + "#jwtToken")}`
+					'Authorization': `Bearer ${Cookies.get(currentUser + "#jwtToken")}`
 				}
 			}).then((response) => {
 				if (!response.ok) {

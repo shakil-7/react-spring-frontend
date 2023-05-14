@@ -7,7 +7,8 @@ import { TransactionDetails } from "./TransactionDetails";
 import { useFetchUser } from "./customHook/useFetchUser";
 import Cookies from 'js-cookie';
 
-export const UserDetails = () => {
+export const UserDetails = ({ setIsLoggedIn, currentUser, setCurrentUser }) => {
+
 
     const { mobileNumber } = useParams();
     const [isAddMoneyClicked, setIsAddMoneyClicked] = useState(0);
@@ -21,14 +22,26 @@ export const UserDetails = () => {
 
     const { data: details, isPending, errorMessage } = useFetchUser(
         'http://localhost:8080/user?mobileNumber=' + mobileNumber,
-        mobileNumber
+        currentUser
     )
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+
+        e.preventDefault();
+
+        // console.log("delete");
+
         fetch('http://localhost:8080/user?mobileNumber=' + mobileNumber, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get(mobileNumber + "#jwtToken")}`
+            }
         }).then(() => {
-            history.push('/all-user')
+            setIsLoggedIn(false);
+            // setCurrentUser('');
+            history.push('/registration')
         });
     };
 
@@ -46,7 +59,7 @@ export const UserDetails = () => {
     const handleSendMoneyClick = (e) => {
         e.preventDefault();
         setIsSendMoneyClicked(isSendMoneyClicked ^ 1);
-        console.log(isSendMoneyClicked);
+        // console.log(isSendMoneyClicked);
         if (isSendMoneyClicked) {
             setSendMoneyButton('Send Money');
         }
@@ -58,7 +71,7 @@ export const UserDetails = () => {
     const handleTransactionDetailsClick = (e) => {
         e.preventDefault();
         setTransactionDetails(transactionDetails ^ 1);
-        console.log(isSendMoneyClicked);
+        // console.log(isSendMoneyClicked);
         if (transactionDetails) {
             settransactionDetailsButton('Transaction Details');
         }
@@ -67,13 +80,17 @@ export const UserDetails = () => {
         }
     };
 
-    // useEffect(()=>{
-
-    //     console.log("Token -> " + Cookies.get(mobileNumber + "#jwtToken"));
-    // },[])
+    useEffect(()=>{
+        console.log("current user " + currentUser)
+        console.log("Token -> " + Cookies.get(currentUser + "#jwtToken"));
+    },[])
 
     return (
         <div className="blog-details">
+
+            {/* {setIsLoggedIn(true)}
+            {setCurrentUser(mobileNumber)} */}
+
             {isPending && <div>Loading...</div>}
             {!isPending && (errorMessage.length > 0) && <div>{errorMessage}</div>}
             {!isPending &&
@@ -91,8 +108,8 @@ export const UserDetails = () => {
                         <br />
 
 
-                        {details.name && isSendMoneyClicked === 0  && transactionDetails === 0 && <button onClick={(e) => handleAddMoneyClick(e)}>{addMoneyButton}</button>}
-                        {isAddMoneyClicked !== 0 && <AddMoney senderMobileNumber={details.mobileNumber} />}
+                        {details.name && isSendMoneyClicked === 0 && transactionDetails === 0 && <button onClick={(e) => handleAddMoneyClick(e)}>{addMoneyButton}</button>}
+                        {isAddMoneyClicked !== 0 && <AddMoney senderMobileNumber={details.mobileNumber} currentUser={currentUser}/>}
 
                         <span style={{
                             margin: 5
@@ -100,11 +117,8 @@ export const UserDetails = () => {
 
                         </span>
                         {details.name && isAddMoneyClicked === 0 && transactionDetails === 0 && <button onClick={(e) => handleSendMoneyClick(e)}>{sendMoneyButton}</button>}
-                        {isSendMoneyClicked !== 0 && <SendMoney senderMobileNumber={details.mobileNumber} />}
+                        {isSendMoneyClicked !== 0 && <SendMoney senderMobileNumber={details.mobileNumber} currentUser={currentUser}/>}
 
-                        {/* <Link to={'/user/'.concat(details.email).concat("/add_money")}>
-                            Add Money
-                        </Link> */}
 
                         <span style={{
                             margin: 5
@@ -113,7 +127,7 @@ export const UserDetails = () => {
                         </span>
 
                         {details.name && isAddMoneyClicked === 0 && isSendMoneyClicked === 0 && <button onClick={(e) => handleTransactionDetailsClick(e)}>{transactionDetailsButton}</button>}
-                        {transactionDetails !== 0 && <TransactionDetails mobileNumber={details.mobileNumber} />}
+                        {transactionDetails !== 0 && <TransactionDetails mobileNumber={details.mobileNumber} currentUser={currentUser}/>}
 
 
                         <div style={{
@@ -122,7 +136,7 @@ export const UserDetails = () => {
                         }}> </div>
 
 
-                        {details.name && <button onClick={handleClick}>Delete</button>}
+                        {details.name && <button onClick={(e) => { handleClick(e) }}>Delete</button>}
                     </article>
                 )
 

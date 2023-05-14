@@ -1,15 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetchUser } from './customHook/useFetchUser';
+import Cookies from 'js-cookie';
 
-export const AllUserList = () => {
+export const AllUserList = ({ setIsLoggedIn, currentUser }) => {
 
 
-  const { data: users, isPending } = useFetchUser('http://localhost:8080/all-user');
+  const { data: users, isPending } = useFetchUser('http://localhost:8080/all-user',
+    currentUser
+  );
 
   const handleClick = (mobileNumber) => {
+
     fetch('http://localhost:8080/user?mobileNumber=' + mobileNumber, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Cookies.get(currentUser + "#jwtToken")}`
+      }
     }).then(() => {
       window.location.reload();
     });
@@ -29,12 +38,12 @@ export const AllUserList = () => {
             <Link to={`/user/${user.mobileNumber}`}>
               <h2>{user.name}</h2>
             </Link>
-            <p>{user.email}</p>
+            <p>Mobile No: {user.mobileNumber}</p>
             {/* <p>{user.gender}</p> */}
             <br />
-            <button onClick={() => handleClick(user.mobileNumber)}>
+            {/* <button onClick={() => handleClick(user.mobileNumber)}>
               <img src="" alt="Delete"></img>
-            </button>
+            </button> */}
           </div>
         ))
 

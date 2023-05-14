@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-export const LoginForm = () => {
+export const LoginForm = ({setIsLoggedIn, setCurrentUser}) => {
 
     const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
@@ -35,6 +35,9 @@ export const LoginForm = () => {
                 Cookies.set(mobileNumber + "#jwtToken", data.jwtToken, {expires: 7});
                 // console.log(data.jwtToken);
                 // console.log(Cookies.get('jwtToken'));
+                setIsLoggedIn(true);
+                setCurrentUser(mobileNumber);
+                // console.log("login page -> " + mobileNumber);
                 history.push('/user/'.concat(mobileNumber));
                 setIsPending(false);
             }).catch(err => {

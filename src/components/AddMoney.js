@@ -43,6 +43,7 @@ export const AddMoney = ({ senderMobileNumber }) => {
                 return response.json();
             }).then(data => {
                 window.location.reload();
+                // history.push('/user/' + senderMobileNumber)
                 setIsPending(false);
             }).catch(err => {
                 setIsPending(false);

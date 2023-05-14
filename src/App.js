@@ -8,6 +8,8 @@ import { RegistrationForm } from './components/RegistrationForm';
 import { UserDetails } from './components/UserDetails';
 import { useState } from 'react';
 import { Logout } from './components/Logout';
+import { NotFound } from './components/NotFound';
+import { DeletePage } from './components/DeletePage';
 
 function App() {
 
@@ -47,6 +49,13 @@ function App() {
 
 						<Route exact path='/user/:email/add_money'>
 							<AddMoney setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser}/>
+						</Route>
+
+						<Route exact path='/notfound'>
+							<NotFound />
+						</Route>
+						<Route exact path='/deletepage'>
+							<DeletePage />
 						</Route>
 
 					</Switch>

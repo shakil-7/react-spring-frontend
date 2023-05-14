@@ -2,12 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetchUser } from './customHook/useFetchUser';
 import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
+import { NotFound } from './NotFound';
 
-export const AllUserList = ({ setIsLoggedIn, currentUser }) => {
+import { useHistory } from 'react-router-dom';
+
+export const AllUserList = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
+  const [jwtToken, setJwtToken] = useState('');
+  const history = useHistory();
+
+  useEffect(() => {
+
+    if (Cookies.get('isLoggedIn') !== 'true') {
+      history.push('/notfound')
+    }
+
+    // console.log(isLoggedIn);
+    // console.log(currentUser);
+    // console.log(jwtToken);
+
+  },[])
 
 
   const { data: users, isPending } = useFetchUser('http://localhost:8080/all-user',
-    currentUser
+    Cookies.get('currentUser')
   );
 
   const handleClick = (mobileNumber) => {

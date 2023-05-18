@@ -10,8 +10,10 @@ import { useState } from 'react';
 import { Logout } from './components/Logout';
 import { NotFound } from './components/NotFound';
 import { DeletePage } from './components/DeletePage';
+import { ResetPassword } from './components/ResetPassword';
 
 import { NotAuthorizedPage } from './components/NotAuthorizedPage';
+import { ForgetPassword } from './components/ForgetPassword';
 
 function App() {
 
@@ -61,6 +63,13 @@ function App() {
 						</Route> */}
 						<Route exact path='/deletepage'>
 							<DeletePage />
+						</Route>
+						<Route exact path='/forgot_password'>
+							<ForgetPassword />
+						</Route>
+
+						<Route exact path='/reset-password/:token'>
+							<ResetPassword />
 						</Route>
 
 					</Switch>

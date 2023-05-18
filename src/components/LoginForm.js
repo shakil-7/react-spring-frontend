@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 export const LoginForm = () => {
@@ -32,10 +32,10 @@ export const LoginForm = () => {
                 return response.json();
             }).then(data => {
 
-                Cookies.set(mobileNumber + "#jwtToken", data.jwtToken, {expires: 7});
-                Cookies.set("isLoggedIn", true, {expires: 7});
-                Cookies.set("currentUser", mobileNumber, {expires: 7});
-                
+                Cookies.set(mobileNumber + "#jwtToken", data.jwtToken, { expires: 7 });
+                Cookies.set("isLoggedIn", true, { expires: 7 });
+                Cookies.set("currentUser", mobileNumber, { expires: 7 });
+
                 history.push('/user/'.concat(mobileNumber));
                 setIsPending(false);
             }).catch(err => {
@@ -72,6 +72,10 @@ export const LoginForm = () => {
                 {!isPending && <button type='submit'>Login</button>}
                 {isPending && <button type='button'>Logging...</button>}
             </form>
+
+            <br />
+
+            <Link to='/forgot_password' style={{ textDecoration: 'none' }}>Forgot Password?</Link>
 
 
             <h3>{feedbackMessage}</h3>

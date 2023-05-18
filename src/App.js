@@ -56,9 +56,9 @@ function App() {
 						<Route exact path='/notfound'>
 							<NotFound />
 						</Route>
-						<Route exact path='/notauthorized'>
+						{/* <Route exact path='/notauthorized'>
 							<NotAuthorizedPage />
-						</Route>
+						</Route> */}
 						<Route exact path='/deletepage'>
 							<DeletePage />
 						</Route>

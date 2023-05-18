@@ -11,30 +11,30 @@ export const NotFound = () => {
   const reloadCount = sessionStorage.getItem('reloadCount');
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (Cookies.get('isLoggedIn') === 'true') {
-      setIsLoggedIn(true);
-    }
-    setCurrentUser(Cookies.get('currentUser'));
-    setJwtToken(Cookies.get(currentUser + '#jwtToken'));
+  //   if (Cookies.get('isLoggedIn') === 'true') {
+  //     setIsLoggedIn(true);
+  //   }
+  //   setCurrentUser(Cookies.get('currentUser'));
+  //   setJwtToken(Cookies.get(currentUser + '#jwtToken'));
 
-    if (Cookies.get('isLoggedIn') === 'true') {
-      setIsLoggedIn(true);
+  //   if (Cookies.get('isLoggedIn') === 'true') {
+  //     setIsLoggedIn(true);
 
-      Cookies.remove('isLoggedIn');
-      Cookies.remove('currentUser');
-      Cookies.remove(currentUser + '#jwtToken');
-    }
+  //     Cookies.remove('isLoggedIn');
+  //     Cookies.remove('currentUser');
+  //     Cookies.remove(currentUser + '#jwtToken');
+  //   }
 
 
-    if (reloadCount < 1) {
-      sessionStorage.setItem('reloadCount', String(reloadCount + 1));
-      window.location.reload();
-    } else {
-      sessionStorage.removeItem('reloadCount');
-    }
-  },[])
+  //   if (reloadCount < 1) {
+  //     sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+  //     window.location.reload();
+  //   } else {
+  //     sessionStorage.removeItem('reloadCount');
+  //   }
+  // }, [])
 
   return (
     <div className='not-found'>

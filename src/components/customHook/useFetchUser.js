@@ -13,18 +13,15 @@ export const useFetchUser = (url, currentUser) => {
 	useEffect(() => {
 
 		if (Cookies.get('isLoggedIn') !== 'true') {
-			history.push('/notauthorized')
+			history.push('/notfound');
 		}
 		else {
 			console.log("currentUser -> " + currentUser);
-
-
 			let jwtToken = Cookies.get(currentUser + "#jwtToken");
-			console.log(Cookies.get(currentUser + "#jwtToken") === undefined)
-
-			console.log("url : " + url)
+			// console.log(Cookies.get(currentUser + "#jwtToken") === undefined)
+			// console.log("url : " + url)
 			// jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIOiItMSIsImlhdCI6MTY4NDAzNzAxOCwiZXhwIjoxNjg0MDM4ODE4fQ.u9iPYuFptcPb3CifVxpjZoLnXP_FXN9qd8VBfdR7MVY";
-			console.log('Bearer ' + jwtToken)
+			// console.log('Bearer ' + jwtToken);
 
 			// setJwtToken(Cookies.get('1'))
 			// console.log(url);

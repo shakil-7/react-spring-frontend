@@ -22,7 +22,6 @@ export const useFetchUser = (url, currentUser) => {
 			// console.log("url : " + url)
 			// jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIOiItMSIsImlhdCI6MTY4NDAzNzAxOCwiZXhwIjoxNjg0MDM4ODE4fQ.u9iPYuFptcPb3CifVxpjZoLnXP_FXN9qd8VBfdR7MVY";
 			// console.log('Bearer ' + jwtToken);
-
 			// setJwtToken(Cookies.get('1'))
 			// console.log(url);
 			setTimeout(() => {

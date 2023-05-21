@@ -30,6 +30,9 @@ export const Logout = () => {
     <div>
       
       Succesfully Log out
+      {
+        localStorage.getItem('someData')
+      }
     </div>
   )
 }

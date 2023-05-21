@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 
 export const LoginForm = () => {
 
+    // const localStore
+
     const [mobileNumber, setMobileNumber] = useState('');
     const [password, setPassword] = useState('');
     const [isPending, setIsPending] = useState(false);
@@ -36,6 +38,9 @@ export const LoginForm = () => {
                 Cookies.set("isLoggedIn", true, { expires: 7 });
                 Cookies.set("currentUser", mobileNumber, { expires: 7 });
 
+
+                localStorage.setItem('someData', "data....");
+                
                 history.push('/user/'.concat(mobileNumber));
                 setIsPending(false);
             }).catch(err => {

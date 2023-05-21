@@ -14,7 +14,7 @@ export const ResetPassword = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(token);
+    // console.log(token);
 
     const resetPassword = { newPassword }
     // console.log(resetPassword);
